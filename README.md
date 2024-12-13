@@ -64,4 +64,4 @@ What RouterProtector acctually do? RouterProtector protect our routes(/register,
 At the first step we send post request to server side to check validation of token(checkToken function) if token is valid it return true value and if values is true user can access to route if value was false navigate to
 login page.
 
-Notice: For see error messages in frontend side i don implement router protector for each user role.
+Notice: For see error messages in frontend side i dont implement router protector for each user role.
