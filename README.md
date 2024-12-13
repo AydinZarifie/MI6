@@ -2,7 +2,7 @@
 This implementation using MVC athcitecture with mongodb database in backend side,Reactjs in frontend side,and using RESTFULL API for create connection between client(frontend) and server(backend).
 ## Backend
 
-  First implementation in authentication controller is sigup function that get information like password,username and role from client in the json format,hash the password and save into database on of the important 
+  First implmentation in authentication controller is sigup function that get information like password,username and role from client in the json format,hash the password and save into database on of the important 
 things that i implement in signup controller is access control and only the manager can add user in the system , if another roles try to add user they get error from server(Detail of access controll in other topic)
 another one is login proccess that we get data like username and password from server and hash the password and compare with hash of password that we store in the database(with bcrypt package) if password equal we generate 
 jwt token with 1hr expiration and send response to client side,the important things is jwt token include username and role of user,and when we decode jwt token its very useufull for our controll access.
