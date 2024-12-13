@@ -34,7 +34,6 @@ exports.createEquipments = async(req, res) => {
   
     //check username does exist
     const isUser = await User.find({username: username});
-    console.log(isUser);
     
     if(isUser.length == 0){
       console.log(1);

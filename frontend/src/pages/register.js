@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register (){
   const [username, setUsername] = useState('');
@@ -7,6 +8,7 @@ export default function Register (){
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -30,9 +32,13 @@ export default function Register (){
         body: JSON.stringify({ username, password, role }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to signup.');
+      if (!response.ok) {        
+        const errorData = await response;
+        console.log("hi");
+        setError('User already exist');
+        console.log(error);
+        
+        
       }
 
       const data = await response.json();
@@ -43,8 +49,10 @@ export default function Register (){
       setUsername('');
       setPassword('');
       setRole('');
+
+      navigate('/dashboard')
     } catch (err) {
-      setError(err.message);
+      setError('Username already exist');
     } finally {
       setIsLoading(false);
     }

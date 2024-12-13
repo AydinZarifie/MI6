@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router,Route,Routes} from 'react-router-dom';
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Misson from "./pages/missons";
@@ -9,22 +9,23 @@ import Dashboard from './pages/dashbord';
 import Base from './pages/base';
 import AddEquipment from './pages/assign_equipment';
 import AddMission from './pages/add_mission';
+import ProtectedRoute from './utils/ProtectRoute';
 
-export const Routes  = () => {
+export const Rout  = () => {
 
     return(
         <Router>
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/equipment" component={Equipments} />
-            <Route path="/mission" component={Misson} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/base" component={Base} />
-            <Route path="/addequipment" component={AddEquipment} />
-            <Route path="/addmission" component={AddMission} />
-            <Route path='/' component={Home} />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<ProtectedRoute element={<Register/>} />}/>
+            <Route path="/mission" element={<ProtectedRoute element={<Misson/>} />}/>
+            <Route path="/equipment" element={<ProtectedRoute element={<Equipments/>} />}/>
+            <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard/>} />}/>
+            <Route path="/base" element={<ProtectedRoute element={<Base/>} />}/>
+            <Route path="/addequipment" element={<ProtectedRoute element={<AddEquipment/>} />}/>
+            <Route path="/addmission" element={<ProtectedRoute element={<AddMission/>} />}/>
+            <Route path="/topsecret" element={<ProtectedRoute element={<Home/>} />}/>
+          </Routes>
       </Router>
     );
 

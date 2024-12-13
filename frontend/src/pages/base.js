@@ -1,12 +1,15 @@
 import React from "react";
 //import "./styles/styles.css"
-
+import { useNavigate } from "react-router-dom";
 
 export default function Base(){
 
+    const navigate = useNavigate();
+
     async function logout(){
       localStorage.removeItem('token');
-    }
+      navigate("/login");
+    } 
 
     const navStyle = {
       display: 'flex',

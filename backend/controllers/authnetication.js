@@ -1,28 +1,38 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const {check} = require("../utils/checktoken")
 
 exports.signup = async(req,res) => {
-    try {
-        const username = req.body.username;
-        const password = req.body.password;
-        const role = req.body.role;
     
-        const passHash = await bcrypt.hash(password,12);
-    
-        //check username is unique
-        const user = new User({
-            username:username,
-            password:passHash,
-            role:role
-        })
-        //store in database
-        await user.save();
-        res.status(201).json({
-            message:"Signup successfully"
-        })
-    } catch (error) {
-        const err = new Error("Signup Failed");
+    if(req.role == 'manager'){
+        try {
+            const username = req.body.username;
+            const password = req.body.password;
+            const role = req.body.role;
+        
+            const passHash = await bcrypt.hash(password,12);
+        
+            //check username is unique
+            const user = new User({
+                username:username,
+                password:passHash,
+                role:role
+            })
+            //store in database
+            await user.save();
+            res.status(201).json({
+                message:"Signup successfully"
+            })
+        } catch (error) {
+            const err = new Error("Signup Failed");
+            err.statusCode = 422;
+            throw err;
+        }
+    }
+
+    else{
+        const err = new Error("Invalid access");
         err.statusCode = 422;
         throw err;
     }
@@ -76,4 +86,11 @@ exports.getDashbord = async(req,res) => {
     res.status(200).json({
         data:user
     });
+}
+
+exports.checkToken = async(req,res) =>{
+    const token = req.body.token;
+    const status = check(token);
+    console.log(status);
+    res.json(status);
 }

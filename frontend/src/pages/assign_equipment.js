@@ -37,7 +37,7 @@ export default function AddMission (){
       }
 
       const data = await response.json();
-      setSuccess('Signup successful!');
+      setSuccess('Equipment assign successfully');
       console.log('User signed up:', data);
 
       // Clear form
@@ -45,7 +45,7 @@ export default function AddMission (){
       setTitle('');
       setDescription('');
     } catch (err) {
-      setError(err.message);
+      setError("Invalid access");
     } finally {
       setIsLoading(false);
     }
@@ -131,7 +131,9 @@ export default function AddMission (){
       <button type="submit" style={buttonStyle}>
         Assign Gadget
       </button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </form>
+    
   </div>
   );
 };

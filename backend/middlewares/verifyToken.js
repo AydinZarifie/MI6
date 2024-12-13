@@ -34,7 +34,6 @@ module.exports = (req,res,next) => {
     req.username = decodetoken.username;
 
     console.log(req.role);
-    
     next();
 
 }   

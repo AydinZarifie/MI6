@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 
 export default function Login(){
   const [username, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -12,6 +14,7 @@ export default function Login(){
     setError('');
 
     try {
+      
       const response = await fetch('http://localhost:5000/auth/login', {
         method: 'POST',
         headers: {
@@ -24,14 +27,14 @@ export default function Login(){
         const errorData = await response.json();
         throw new Error(errorData.message || 'Something went wrong');
       }
-
+     
       const data = await response.json();
-      
       // Handle successful login, e.g., save token or redirect
       localStorage.setItem('token', data.token);
       console.log('Login successful:', localStorage.getItem('token'));
+      navigate('/dashboard')
     } catch (err) {
-      setError(err.message);
+      setError("username or password is wrong");
     } finally {
       setIsLoading(false);
     }
