@@ -56,7 +56,7 @@ entity.
 
 
 ## Frontend
-In the frontend side i implement pages folders for create page for each part of project,i prefer look at the codes to get more informtion but i want talk about very important part here,RouterProtecter.
+In the frontend side i implement pages folders for create page for each part of project,i prefer look at the codes to get more information but i want talk about very important part here,RouterProtecter.
 What RouterProtector acctually do? RouterProtector protect our routes(/register,/missions,/dashboard,...except /login route) to invalid access but,how?(look at the blow picture)
 
 ![Annotation 2024-12-13 193518](https://github.com/user-attachments/assets/035a9ad9-cec6-479c-ab1d-d3160b9bed06)
